@@ -1,0 +1,16 @@
+-hosts: loyalhost
+ vars_prompt: 
+    -name: cn
+     prompt: enter container name
+     private: no
+    
+    -name: sport
+     prompt: enter port number for ssh
+     provider: no
+
+     -name: wport
+      prompt: enter port number for webserver
+      provider: no
+
+      
+    

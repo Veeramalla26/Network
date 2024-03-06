@@ -1,0 +1,26 @@
+- name: Deploy Docker container with React app using Apache
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Install Docker Python module
+      pip:
+        name: docker
+    
+    - name: Ensure /tmp/network directory exists
+      file:
+        path: /tmp/network
+        state: directory
+
+    - name: Copy React app build files to the host
+      copy:
+        src: /home/manasa/Desktop/Ansible/index.html
+        dest: /tmp/network
+
+    - name: Create Docker container with Apache
+      docker_container:
+        name: react_container
+        image: httpd:latest
+        ports:
+          - "80:80"
+        volumes:
+          - /tmp/network:/usr/local/apache2/htdocs
